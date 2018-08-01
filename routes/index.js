@@ -19,7 +19,12 @@ router.get('/filter', function(req, res, next) {
 
   productController.findAllProductByCategory(category)
     .then((products) => {
-      res.render('index', { products: products });
+
+      if (products.length === 0) {
+        res.render('no-product', { message: 'No Product exist. Search something else!' });
+      } else {
+        res.render('index', { products: products });
+      }
     })
     .catch((error) => {
       res.render('error', {message: 'Error', error: error});
