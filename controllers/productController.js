@@ -25,5 +25,13 @@ module.exports = {
         .catch(error =>  reject(error));
 
     });
+  },
+  getProductById: (id) => {
+    return new Promise((resolve, reject) => {
+      Product.findById(id)
+        .then(product => resolve(product))
+        .catch(error => reject(error));
+    });
+
   }
 };

@@ -40,6 +40,23 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/:id', function(req, res, next) {
+  const id = req.params.id;
+  productController.getProductById(id)
+    .then( product => {
+
+      res.render('product-page', {product: product})
+    })
+    .catch( error => {
+      res.json({
+        message: 'failure',
+        data: error
+      });
+      return;
+    });
+
+});
+
 router.post('/createproduct', upload.single('productPicture'), function(req, res, next) {
   let productPicture
   if (req.file) {
@@ -49,7 +66,7 @@ router.post('/createproduct', upload.single('productPicture'), function(req, res
   }
 
   req.body.productPicture = productPicture;
-  console.log(req.body)
+  
   productController.createProduct(req.body)
     .then(product => {
       res.json({
