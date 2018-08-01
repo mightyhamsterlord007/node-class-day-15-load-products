@@ -6,6 +6,7 @@ var productSchema = new mongoose.Schema({
     price: {type: Number, default: 0},
     category: {type: String, default: ''},
     description: {type: String, default: ''},
+    productPicture: {type: String, default: ''},
     createdTimeStamp: {type: String, default: () => moment().format("dddd, MMMM Do YYYY, h:mm:ss a")} 
 });
 
