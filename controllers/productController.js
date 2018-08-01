@@ -16,7 +16,8 @@ module.exports = {
         productName: params.productName,
         category: params.category,
         price: params.price,
-        description: params.description
+        description: params.description,
+        productPicture: params.productPicture
       });
 
       newProduct.save()

@@ -9,7 +9,8 @@ var storage = multer.diskStorage({
     cb(null, './public/product-pictures');
   },
   filename: function(req, file, cb) {
-    cb(null, uuid());
+    let profileID = uuid() + '.jpg';
+    cb(null, profileID);
   }
 })
 
@@ -40,10 +41,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/createproduct', upload.single('productPicture'), function(req, res, next) {
-  
-  console.log(req.file)
+  let productPicture
+  if (req.file) {
+    productPicture = req.file.filename;
+  } else {
+    productPicture = 'noimage.jpg';
+  }
+
+  req.body.productPicture = productPicture;
   console.log(req.body)
-  return;
   productController.createProduct(req.body)
     .then(product => {
       res.json({
