@@ -33,5 +33,13 @@ module.exports = {
         .catch(error => reject(error));
     });
 
+  },
+
+  findAllProductByCategory: (category) => {
+    return new Promise((resolve, reject) => {
+      Product.find({category: category})
+        .then(products => resolve(products))
+        .catch(error => reject(error));
+    });
   }
 };
